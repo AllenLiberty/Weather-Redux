@@ -10,10 +10,10 @@ Advantage:
   
 we can find the Action/Thunk/Store/State in this demo
 
-  WeatherStore: receives actions uses the Reducer to replace the state, and fires off the new state to subscribed views
-  WeatherState: a constant struct that defines and contains the state in memory. if In large app we can made up of sub-state
-  WeatherReducer: a pure function that is given old state and an action, and it returns a new state struct that’ll replace the old one in the store.
-  WeatherAction: simple structs that the Reducer uses to update state.
-  WeatherThunk: implementation of the unidirectional data flow architecture in this case I do the netwok and requset location
+  1. WeatherStore:     receives actions uses the Reducer to replace the state, and fires off the new state to subscribed views
+  2. WeatherState: a    constant struct that defines and contains the state in memory. if In large app we can made up of sub-state
+  3. WeatherReducer:     a pure function that is given old state and an action, and it returns a new state struct that’ll replace the old one in the store.
+  4. WeatherAction:     simple structs that the Reducer uses to update state.
+  5. WeatherThunk:     implementation of the unidirectional data flow architecture in this case I do the netwok and requset location
   
   
