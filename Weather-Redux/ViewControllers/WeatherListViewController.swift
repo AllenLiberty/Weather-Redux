@@ -9,6 +9,7 @@
 import UIKit
 import ReSwift
 import ReSwiftThunk
+import Alamofire
 
 class WeatherListViewController: UIViewController {
 
@@ -20,6 +21,7 @@ class WeatherListViewController: UIViewController {
         super.viewDidLoad()
         weatherStore.subscribe(self)
         weatherStore.dispatch(fetchWeatherThunk("37.8267", longitude: "-122.4233"))
+        listeningNetwork()
     }
     
     deinit {
@@ -53,6 +55,23 @@ extension WeatherListViewController: StoreSubscriber {
         tableView.dataSource = tableDataSource
         tableView.reloadData()
         currentlyView.updateUI(state.weatherModel)
+    }
+}
+
+// Network Changed
+extension WeatherListViewController{
+    func listeningNetwork(){
+        let net = NetworkReachabilityManager()
+        net?.startListening()
+        net?.listener = { status in
+            if net?.isReachable ?? false {
+                switch status {
+                case .reachable(.ethernetOrWiFi), .reachable(.wwan):
+                    weatherStore.dispatch(fetchWeatherThunk("37.8267", longitude: "-122.4233"))
+                default: break
+                }
+            }
+        }
     }
 }
 

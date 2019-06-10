@@ -30,9 +30,7 @@ let fetchLocationThunk = Thunk<WeatherState> { dispatch, getState in
         LocationManager.shared.locateFromGPS(.oneShot, accuracy: .city, result: { (result) in
             switch result {
             case .failure(let error):
-                debugPrint("Received error: \(error) the location was changed to Culver")
-                dispatch(fetchWeatherThunk("34.0273", longitude: "-118.3864"))
-                
+                debugPrint("Received error: \(error)")
             case .success(let location):
                 dispatch(fetchWeatherThunk(String(location.coordinate.latitude), longitude: String(location.coordinate.longitude)))
             }
